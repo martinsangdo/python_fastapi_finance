@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from app.schemas.user import UserCreate, UserUpdate, UserResponse
 from app.services.user_service import user_service
 
-router = APIRouter(prefix="/users", tags=["users"])
+router = APIRouter(prefix="/api/users")
 
 @router.get("/", response_model=List[UserResponse])
 async def read_users():

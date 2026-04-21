@@ -1,35 +1,35 @@
 from typing import List, Optional
 from bson import ObjectId
 from app.database import get_database
-from app.schemas.user import UserModel, UserCreate, UserUpdate
+from app.schemas.user import UserModel, UserCreate, UserUpdate, UserResponse
 from datetime import datetime
 
 class UserService:
     def __init__(self):
         self.collection_name = "users"
 
-    async def get_all_users(self) -> List[UserModel]:
+    async def get_all_users(self) -> List[UserResponse]:
         db = get_database()
         users_raw = await db[self.collection_name].find().to_list(1000)
-        return [UserModel(**user) for user in users_raw]
+        return [UserResponse(**user) for user in users_raw]
 
-    async def create_user(self, user_data: UserCreate) -> UserModel:
+    async def create_user(self, user_data: UserCreate) -> UserResponse:
         db = get_database()
         user_dict = user_data.model_dump()
         user_dict["created_at"] = datetime.utcnow()
         user_dict["updated_at"] = datetime.utcnow()
         result = await db[self.collection_name].insert_one(user_dict)
         created_raw = await db[self.collection_name].find_one({"_id": result.inserted_id})
-        return UserModel(**created_raw)
+        return UserResponse(**created_raw)
 
-    async def get_user_by_id(self, user_id: str) -> Optional[UserModel]:
+    async def get_user_by_id(self, user_id: str) -> Optional[UserResponse]:
         if not ObjectId.is_valid(user_id):
             return None
         db = get_database()
         user_raw = await db[self.collection_name].find_one({"_id": ObjectId(user_id)})
-        return UserModel(**user_raw) if user_raw else None
+        return UserResponse(**user_raw) if user_raw else None
 
-    async def update_user(self, user_id: str, user_data: UserUpdate) -> Optional[UserModel]:
+    async def update_user(self, user_id: str, user_data: UserUpdate) -> Optional[UserResponse]:
         if not ObjectId.is_valid(user_id):
             return None
         db = get_database()

@@ -19,7 +19,7 @@ class UserUpdate(BaseModel):
     email: Optional[str] = None
     full_name: Optional[str] = None
 
-class UserResponse(MongoBaseModel):
+class UserResponse(BaseModel):
     username: str
     email: str
     full_name: Optional[str] = None
