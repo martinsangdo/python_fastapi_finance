@@ -15,6 +15,12 @@ class UserService:
 
     async def create_user(self, user_data: UserCreate) -> UserResponse:
         db = get_database()
+        
+        # Check if user already exists
+        existing_user = await db[self.collection_name].find_one({"email": user_data.email})
+        if existing_user:
+            raise HTTPException(status_code=400, detail="Email already registered")
+            
         user_dict = user_data.model_dump()
         user_dict["created_at"] = datetime.utcnow()
         user_dict["updated_at"] = datetime.utcnow()
