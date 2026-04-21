@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CSV Analyst</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
       --bg: #080b10;
@@ -21,7 +24,13 @@
       --display: 'Syne', sans-serif;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background: var(--bg);
@@ -38,8 +47,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
       background-size: 40px 40px;
       pointer-events: none;
       z-index: 0;
@@ -92,7 +101,11 @@
       margin-left: auto;
       transition: background 0.3s;
     }
-    .status-dot.active { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+    .status-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
 
     /* Two-column layout */
     .layout {
@@ -124,7 +137,9 @@
       gap: 8px;
     }
 
-    .panel-header span { color: var(--accent); }
+    .panel-header span {
+      color: var(--accent);
+    }
 
     /* Upload zone */
     .upload-zone {
@@ -138,12 +153,15 @@
       position: relative;
     }
 
-    .upload-zone:hover, .upload-zone.drag-over {
+    .upload-zone:hover,
+    .upload-zone.drag-over {
       border-color: var(--accent);
-      background: rgba(0,212,170,0.04);
+      background: rgba(0, 212, 170, 0.04);
     }
 
-    .upload-zone input { display: none; }
+    .upload-zone input {
+      display: none;
+    }
 
     .upload-icon {
       font-size: 32px;
@@ -169,17 +187,22 @@
     .file-info {
       margin: 0 20px 20px;
       padding: 12px 16px;
-      background: rgba(0,212,170,0.06);
-      border: 1px solid rgba(0,212,170,0.2);
+      background: rgba(0, 212, 170, 0.06);
+      border: 1px solid rgba(0, 212, 170, 0.2);
       border-radius: 8px;
       display: none;
       align-items: center;
       gap: 10px;
     }
 
-    .file-info.show { display: flex; }
+    .file-info.show {
+      display: flex;
+    }
 
-    .file-icon { color: var(--accent); font-size: 18px; }
+    .file-icon {
+      color: var(--accent);
+      font-size: 18px;
+    }
 
     .file-name {
       flex: 1;
@@ -200,7 +223,10 @@
       padding: 0;
       transition: color 0.2s;
     }
-    .file-clear:hover { color: var(--accent3); }
+
+    .file-clear:hover {
+      color: var(--accent3);
+    }
 
     /* Suggestions */
     .suggestions {
@@ -232,10 +258,13 @@
       opacity: 0.5;
     }
 
-    .suggestion-chip.enabled { opacity: 1; }
+    .suggestion-chip.enabled {
+      opacity: 1;
+    }
+
     .suggestion-chip.enabled:hover {
       border-color: var(--accent2);
-      background: rgba(0,148,255,0.06);
+      background: rgba(0, 148, 255, 0.06);
       color: var(--accent2);
     }
 
@@ -258,9 +287,18 @@
       scrollbar-color: var(--border) transparent;
     }
 
-    .messages::-webkit-scrollbar { width: 4px; }
-    .messages::-webkit-scrollbar-track { background: transparent; }
-    .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .messages::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
 
     /* Empty state */
     .empty-state {
@@ -297,8 +335,15 @@
     }
 
     @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .msg-role {
@@ -309,8 +354,13 @@
       padding-left: 2px;
     }
 
-    .msg.user .msg-role { color: var(--accent2); }
-    .msg.assistant .msg-role { color: var(--accent); }
+    .msg.user .msg-role {
+      color: var(--accent2);
+    }
+
+    .msg.assistant .msg-role {
+      color: var(--accent);
+    }
 
     .msg-body {
       padding: 14px 16px;
@@ -321,8 +371,8 @@
     }
 
     .msg.user .msg-body {
-      background: rgba(0,148,255,0.08);
-      border: 1px solid rgba(0,148,255,0.15);
+      background: rgba(0, 148, 255, 0.08);
+      border: 1px solid rgba(0, 148, 255, 0.15);
       align-self: flex-end;
       max-width: 85%;
     }
@@ -347,7 +397,9 @@
       transition: transform 0.2s;
     }
 
-    .chart-img:hover { transform: scale(1.01); }
+    .chart-img:hover {
+      transform: scale(1.01);
+    }
 
     /* Thinking indicator */
     .thinking {
@@ -372,12 +424,27 @@
       animation: blink 1.2s infinite;
     }
 
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
 
     @keyframes blink {
-      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-      40% { opacity: 1; transform: scale(1); }
+
+      0%,
+      80%,
+      100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+      }
+
+      40% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     /* Input bar */
@@ -411,9 +478,17 @@
       max-height: 140px;
     }
 
-    textarea:focus { border-color: var(--accent); }
-    textarea::placeholder { color: var(--muted); }
-    textarea:disabled { opacity: 0.5; }
+    textarea:focus {
+      border-color: var(--accent);
+    }
+
+    textarea::placeholder {
+      color: var(--muted);
+    }
+
+    textarea:disabled {
+      opacity: 0.5;
+    }
 
     .send-btn {
       height: 44px;
@@ -431,22 +506,31 @@
       justify-content: center;
     }
 
-    .send-btn:hover { transform: scale(1.05); }
-    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .send-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0, 0, 0, 0.92);
       z-index: 1000;
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
     }
 
-    .lightbox.open { display: flex; }
+    .lightbox.open {
+      display: flex;
+    }
 
     .lightbox img {
       max-width: 92vw;
@@ -456,285 +540,306 @@
     }
 
     @media (max-width: 800px) {
-      .layout { grid-template-columns: 1fr; }
-      .chat-panel { height: 60vh; }
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-panel {
+        height: 60vh;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<div class="app">
-  <header>
-    <div>
-      <div class="tagline">AI-Powered</div>
-      <div class="logo">CSV Analyst</div>
-    </div>
-    <div class="status-dot" id="statusDot"></div>
-  </header>
+  <div class="app">
+    <header>
+      <div>
+        <div class="tagline">AI-Powered</div>
+        <div class="logo">CSV Analyst</div>
+      </div>
+      <div class="status-dot" id="statusDot"></div>
+    </header>
+    <strong>Hello {{ username }}</strong>
+    <label for="user-select">Choose a User:</label>
+    <br /><br />
+    <select name="users" id="user-select">
+      <option value="">--Please choose an option--</option>
 
-  <div class="layout">
-    <!-- Left: upload + suggestions -->
-    <div>
-      <div class="panel">
-        <div class="panel-header"><span>01</span> Data Source</div>
+      {% for user in user_list %}
+      <option value="{{ user.id }}">{{ user.username }}</option>
+      {% endfor %}
+    </select>
 
-        <div class="upload-zone" id="uploadZone">
-          <input type="file" id="fileInput" accept=".csv" />
-          <span class="upload-icon">⬆</span>
-          <span class="upload-label">Drop CSV here</span>
-          <span class="upload-sub">or click to browse</span>
+    <div class="layout">
+      <!-- Left: upload + suggestions -->
+      <div>
+        <div class="panel">
+          <div class="panel-header"><span>01</span> Data Source</div>
+
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="fileInput" accept=".csv" />
+            <span class="upload-icon">⬆</span>
+            <span class="upload-label">Drop CSV here</span>
+            <span class="upload-sub">or click to browse</span>
+          </div>
+
+          <div class="file-info" id="fileInfo">
+            <span class="file-icon">◈</span>
+            <span class="file-name" id="fileName">—</span>
+            <button class="file-clear" id="fileClear" title="Remove file">✕</button>
+          </div>
         </div>
 
-        <div class="file-info" id="fileInfo">
-          <span class="file-icon">◈</span>
-          <span class="file-name" id="fileName">—</span>
-          <button class="file-clear" id="fileClear" title="Remove file">✕</button>
+        <div class="panel" style="margin-top: 16px;">
+          <div class="panel-header"><span>02</span> Quick Prompts</div>
+          <div class="suggestions">
+            <div class="suggestions-label">Upload a file to unlock</div>
+            <button class="suggestion-chip"
+              data-q="Give me a summary of this dataset — rows, columns, types, and key stats.">📋 Dataset
+              overview</button>
+            <button class="suggestion-chip" data-q="What are the top 5 insights or patterns you notice in this data?">💡
+              Key insights</button>
+            <button class="suggestion-chip" data-q="Show me a distribution chart for all numeric columns.">📊
+              Distributions</button>
+            <button class="suggestion-chip"
+              data-q="Are there any missing values or data quality issues? Show me a summary.">🔍 Data quality
+              check</button>
+            <button class="suggestion-chip" data-q="Plot a correlation heatmap of all numeric columns.">🌡 Correlation
+              heatmap</button>
+            <button class="suggestion-chip"
+              data-q="Show me the top 10 rows and describe what kind of data this appears to be.">🔬 Preview &
+              describe</button>
+          </div>
         </div>
       </div>
 
-      <div class="panel" style="margin-top: 16px;">
-        <div class="panel-header"><span>02</span> Quick Prompts</div>
-        <div class="suggestions">
-          <div class="suggestions-label">Upload a file to unlock</div>
-          <button class="suggestion-chip" data-q="Give me a summary of this dataset — rows, columns, types, and key stats.">📋 Dataset overview</button>
-          <button class="suggestion-chip" data-q="What are the top 5 insights or patterns you notice in this data?">💡 Key insights</button>
-          <button class="suggestion-chip" data-q="Show me a distribution chart for all numeric columns.">📊 Distributions</button>
-          <button class="suggestion-chip" data-q="Are there any missing values or data quality issues? Show me a summary.">🔍 Data quality check</button>
-          <button class="suggestion-chip" data-q="Plot a correlation heatmap of all numeric columns.">🌡 Correlation heatmap</button>
-          <button class="suggestion-chip" data-q="Show me the top 10 rows and describe what kind of data this appears to be.">🔬 Preview & describe</button>
-        </div>
-      </div>
-    </div>
+      <!-- Right: chat interface -->
+      <div class="panel chat-panel">
+        <div class="panel-header"><span>03</span> Analysis Console</div>
 
-    <!-- Right: chat interface -->
-    <div class="panel chat-panel">
-      <div class="panel-header"><span>03</span> Analysis Console</div>
-
-      <div class="messages" id="messages">
-        <div class="empty-state" id="emptyState">
-          <div class="empty-glyph">⬡</div>
-          <div class="empty-title">Upload a CSV to begin</div>
-          <div>Ask questions in natural language — the AI agent will analyze, calculate, and generate charts.</div>
+        <div class="messages" id="messages">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-glyph">⬡</div>
+            <div class="empty-title">Upload a CSV to begin</div>
+            <div>Ask questions in natural language — the AI agent will analyze, calculate, and generate charts.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="input-bar">
-        <div class="input-wrap">
-          <textarea
-            id="questionInput"
-            placeholder="Ask anything about your data…"
-            disabled
-            rows="1"
-          ></textarea>
+        <div class="input-bar">
+          <div class="input-wrap">
+            <textarea id="questionInput" placeholder="Ask anything about your data…" disabled rows="1"></textarea>
+          </div>
+          <button class="send-btn" id="sendBtn" disabled title="Send">➤</button>
         </div>
-        <button class="send-btn" id="sendBtn" disabled title="Send">➤</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <img id="lightboxImg" src="" alt="Chart" />
-</div>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img id="lightboxImg" src="" alt="Chart" />
+  </div>
 
-<script>
-  let sessionId = null;
-  let isLoading = false;
+  <script>
+    let sessionId = null;
+    let isLoading = false;
 
-  const fileInput = document.getElementById('fileInput');
-  const uploadZone = document.getElementById('uploadZone');
-  const fileInfo = document.getElementById('fileInfo');
-  const fileName = document.getElementById('fileName');
-  const fileClear = document.getElementById('fileClear');
-  const messages = document.getElementById('messages');
-  const emptyState = document.getElementById('emptyState');
-  const questionInput = document.getElementById('questionInput');
-  const sendBtn = document.getElementById('sendBtn');
-  const statusDot = document.getElementById('statusDot');
-  const chips = document.querySelectorAll('.suggestion-chip');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
+    const fileInput = document.getElementById('fileInput');
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const fileClear = document.getElementById('fileClear');
+    const messages = document.getElementById('messages');
+    const emptyState = document.getElementById('emptyState');
+    const questionInput = document.getElementById('questionInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const statusDot = document.getElementById('statusDot');
+    const chips = document.querySelectorAll('.suggestion-chip');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
 
-  // Upload zone
-  uploadZone.addEventListener('click', () => fileInput.click());
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-  uploadZone.addEventListener('drop', e => {
-    e.preventDefault();
-    uploadZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) handleUpload(file);
-  });
-
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files[0]) handleUpload(fileInput.files[0]);
-  });
-
-  fileClear.addEventListener('click', () => {
-    clearSession();
-  });
-
-  async function handleUpload(file) {
-    if (!file.name.endsWith('.csv')) {
-      alert('Please upload a CSV file.');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      uploadZone.style.opacity = '0.5';
-      const res = await fetch('/upload', { method: 'POST', body: formData });
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.detail || 'Upload failed');
-
-      sessionId = data.session_id;
-      fileName.textContent = data.filename;
-      fileInfo.classList.add('show');
-      uploadZone.style.display = 'none';
-
-      // Enable UI
-      questionInput.disabled = false;
-      sendBtn.disabled = false;
-      chips.forEach(c => c.classList.add('enabled'));
-      statusDot.classList.add('active');
-
-      addMessage('assistant', `✓ Loaded **${data.filename}**. I'm ready to analyze. Ask me anything — summaries, statistics, trends, or charts.`);
-    } catch (err) {
-      alert('Upload error: ' + err.message);
-    } finally {
-      uploadZone.style.opacity = '1';
-    }
-  }
-
-  async function clearSession() {
-    if (sessionId) {
-      await fetch(`/session/${sessionId}`, { method: 'DELETE' }).catch(() => {});
-    }
-    sessionId = null;
-    fileInfo.classList.remove('show');
-    uploadZone.style.display = '';
-    fileInput.value = '';
-    questionInput.disabled = true;
-    sendBtn.disabled = true;
-    chips.forEach(c => c.classList.remove('enabled'));
-    statusDot.classList.remove('active');
-    messages.innerHTML = '';
-    messages.appendChild(emptyState);
-    emptyState.style.display = '';
-  }
-
-  // Suggestions
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      if (!chip.classList.contains('enabled')) return;
-      questionInput.value = chip.dataset.q;
-      questionInput.focus();
-    });
-  });
-
-  // Send
-  sendBtn.addEventListener('click', sendQuestion);
-  questionInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    // Upload zone
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('drop', e => {
       e.preventDefault();
-      sendQuestion();
+      uploadZone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) handleUpload(file);
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files[0]) handleUpload(fileInput.files[0]);
+    });
+
+    fileClear.addEventListener('click', () => {
+      clearSession();
+    });
+
+    async function handleUpload(file) {
+      if (!file.name.endsWith('.csv')) {
+        alert('Please upload a CSV file.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        uploadZone.style.opacity = '0.5';
+        const res = await fetch('/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.detail || 'Upload failed');
+
+        sessionId = data.session_id;
+        fileName.textContent = data.filename;
+        fileInfo.classList.add('show');
+        uploadZone.style.display = 'none';
+
+        // Enable UI
+        questionInput.disabled = false;
+        sendBtn.disabled = false;
+        chips.forEach(c => c.classList.add('enabled'));
+        statusDot.classList.add('active');
+
+        addMessage('assistant', `✓ Loaded **${data.filename}**. I'm ready to analyze. Ask me anything — summaries, statistics, trends, or charts.`);
+      } catch (err) {
+        alert('Upload error: ' + err.message);
+      } finally {
+        uploadZone.style.opacity = '1';
+      }
     }
-  });
 
-  questionInput.addEventListener('input', () => {
-    questionInput.style.height = 'auto';
-    questionInput.style.height = Math.min(questionInput.scrollHeight, 140) + 'px';
-  });
+    async function clearSession() {
+      if (sessionId) {
+        await fetch(`/session/${sessionId}`, { method: 'DELETE' }).catch(() => { });
+      }
+      sessionId = null;
+      fileInfo.classList.remove('show');
+      uploadZone.style.display = '';
+      fileInput.value = '';
+      questionInput.disabled = true;
+      sendBtn.disabled = true;
+      chips.forEach(c => c.classList.remove('enabled'));
+      statusDot.classList.remove('active');
+      messages.innerHTML = '';
+      messages.appendChild(emptyState);
+      emptyState.style.display = '';
+    }
 
-  async function sendQuestion() {
-    const q = questionInput.value.trim();
-    if (!q || !sessionId || isLoading) return;
-
-    isLoading = true;
-    questionInput.value = '';
-    questionInput.style.height = 'auto';
-    sendBtn.disabled = true;
-
-    emptyState.style.display = 'none';
-    addMessage('user', q);
-
-    const thinkEl = addThinking();
-    messages.scrollTop = messages.scrollHeight;
-
-    try {
-      const res = await fetch('/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ session_id: sessionId, question: q }),
+    // Suggestions
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        if (!chip.classList.contains('enabled')) return;
+        questionInput.value = chip.dataset.q;
+        questionInput.focus();
       });
-      const data = await res.json();
-      thinkEl.remove();
+    });
 
-      if (!res.ok) throw new Error(data.detail || 'Analysis failed');
+    // Send
+    sendBtn.addEventListener('click', sendQuestion);
+    questionInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendQuestion();
+      }
+    });
 
-      addMessage('assistant', data.answer, data.charts || []);
-    } catch (err) {
-      thinkEl.remove();
-      addMessage('assistant', `⚠ Error: ${err.message}`);
-    } finally {
-      isLoading = false;
-      sendBtn.disabled = false;
+    questionInput.addEventListener('input', () => {
+      questionInput.style.height = 'auto';
+      questionInput.style.height = Math.min(questionInput.scrollHeight, 140) + 'px';
+    });
+
+    async function sendQuestion() {
+      const q = questionInput.value.trim();
+      if (!q || !sessionId || isLoading) return;
+
+      isLoading = true;
+      questionInput.value = '';
+      questionInput.style.height = 'auto';
+      sendBtn.disabled = true;
+
+      emptyState.style.display = 'none';
+      addMessage('user', q);
+
+      const thinkEl = addThinking();
       messages.scrollTop = messages.scrollHeight;
-    }
-  }
 
-  function addMessage(role, text, charts = []) {
-    const div = document.createElement('div');
-    div.className = `msg ${role}`;
+      try {
+        const res = await fetch('/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id: sessionId, question: q }),
+        });
+        const data = await res.json();
+        thinkEl.remove();
 
-    const roleEl = document.createElement('div');
-    roleEl.className = 'msg-role';
-    roleEl.textContent = role === 'user' ? '▸ You' : '◈ Analyst';
-    div.appendChild(roleEl);
+        if (!res.ok) throw new Error(data.detail || 'Analysis failed');
 
-    const body = document.createElement('div');
-    body.className = 'msg-body';
-    body.textContent = text;
-    div.appendChild(body);
-
-    if (charts.length > 0) {
-      const chartsDiv = document.createElement('div');
-      chartsDiv.className = 'msg-charts';
-      charts.forEach(b64 => {
-        const img = document.createElement('img');
-        img.className = 'chart-img';
-        img.src = `data:image/png;base64,${b64}`;
-        img.alt = 'Chart';
-        img.addEventListener('click', () => openLightbox(img.src));
-        chartsDiv.appendChild(img);
-      });
-      div.appendChild(chartsDiv);
+        addMessage('assistant', data.answer, data.charts || []);
+      } catch (err) {
+        thinkEl.remove();
+        addMessage('assistant', `⚠ Error: ${err.message}`);
+      } finally {
+        isLoading = false;
+        sendBtn.disabled = false;
+        messages.scrollTop = messages.scrollHeight;
+      }
     }
 
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-    return div;
-  }
+    function addMessage(role, text, charts = []) {
+      const div = document.createElement('div');
+      div.className = `msg ${role}`;
 
-  function addThinking() {
-    const div = document.createElement('div');
-    div.className = 'thinking';
-    div.innerHTML = `<span>Analyzing</span><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
-    messages.appendChild(div);
-    return div;
-  }
+      const roleEl = document.createElement('div');
+      roleEl.className = 'msg-role';
+      roleEl.textContent = role === 'user' ? '▸ You' : '◈ Analyst';
+      div.appendChild(roleEl);
 
-  // Lightbox
-  function openLightbox(src) {
-    lightboxImg.src = src;
-    lightbox.classList.add('open');
-  }
+      const body = document.createElement('div');
+      body.className = 'msg-body';
+      body.textContent = text;
+      div.appendChild(body);
 
-  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
-</script>
+      if (charts.length > 0) {
+        const chartsDiv = document.createElement('div');
+        chartsDiv.className = 'msg-charts';
+        charts.forEach(b64 => {
+          const img = document.createElement('img');
+          img.className = 'chart-img';
+          img.src = `data:image/png;base64,${b64}`;
+          img.alt = 'Chart';
+          img.addEventListener('click', () => openLightbox(img.src));
+          chartsDiv.appendChild(img);
+        });
+        div.appendChild(chartsDiv);
+      }
+
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div;
+    }
+
+    function addThinking() {
+      const div = document.createElement('div');
+      div.className = 'thinking';
+      div.innerHTML = `<span>Analyzing</span><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
+      messages.appendChild(div);
+      return div;
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    }
+
+    lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+  </script>
 </body>
+
 </html>
