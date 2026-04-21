@@ -5,13 +5,13 @@ from app.services.user_service import user_service
 
 router = APIRouter(prefix="/users", tags=["users"])
 
-@router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
-async def create_user(user: UserCreate):
-    return await user_service.create_user(user)
-
 @router.get("/", response_model=List[UserResponse])
 async def read_users():
     return await user_service.get_all_users()
+
+@router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+async def create_user(user: UserCreate):
+    return await user_service.create_user(user)
 
 @router.get("/{user_id}", response_model=UserResponse)
 async def read_user(user_id: str):
