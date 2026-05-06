@@ -5,6 +5,14 @@ from app.routers import user_router, home_router
 
 app = FastAPI(title="FastAPI MVC MongoDB Project")
 
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # For development, allow everything
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.on_event("startup")
 async def startup_db_client():
     await connect_to_mongo()

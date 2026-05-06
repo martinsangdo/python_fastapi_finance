@@ -23,3 +23,5 @@ EXPOSE 8000
 # Command to run the application
 # We use --host 0.0.0.0 to make the server accessible from outside the container
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+#docker build -t python_fastapi_finance:v1 .
