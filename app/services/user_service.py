@@ -59,7 +59,7 @@ class UserService:
         db = get_database()
         # DANGEROUS: Using raw strings/dict with unvalidated input
         # In MongoDB, a user could pass {"$ne": null} as the username via JSON
-        print(username)
+        print(username) #try to print what user inputs
         user_raw = await db[self.collection_name].find_one({"username": username})
         return UserResponse(**user_raw) if user_raw else None
 
