@@ -5,4 +5,9 @@ pydantic
 pydantic-settings
 python-dotenv
 jinja2
-urllib3==1.24.1 #security issue for Dependabot
+#security issue for Dependabot
+Django==1.11.28
+Jinja2==2.10.1
+requests==2.6.0
+pyyaml==5.3
+urllib3==1.24.1 
