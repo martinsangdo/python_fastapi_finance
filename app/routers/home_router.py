@@ -12,3 +12,10 @@ async def show_csv(request: Request):
     users = await user_service.get_all_users()
     content['user_list'] = users
     return templates.TemplateResponse("csv_analysis.html", content)
+
+#test XSS with Sonarqube
+from fastapi.responses import HTMLResponse
+@router.get("/welcome", response_class=HTMLResponse)
+async def welcome(name: str):
+    # DANGEROUS: Directly injecting a string into HTML
+    return f"<h1>Welcome, {name}</h1>"

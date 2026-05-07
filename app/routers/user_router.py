@@ -13,12 +13,12 @@ async def read_users():
 async def create_user(user: UserCreate):
     return await user_service.create_user(user)
 
-@router.get("/{user_id}", response_model=UserResponse)
-async def read_user(user_id: str):
-    user = await user_service.get_user_by_id(user_id)
-    if user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user
+# @router.get("/{user_id}", response_model=UserResponse)
+# async def read_user(user_id: str):
+#     user = await user_service.get_user_by_id(user_id)
+#     if user is None:
+#         raise HTTPException(status_code=404, detail="User not found")
+#     return user
 
 @router.put("/{user_id}", response_model=UserResponse)
 async def update_user(user_id: str, user: UserUpdate):
@@ -33,3 +33,11 @@ async def delete_user(user_id: str):
     if not success:
         raise HTTPException(status_code=404, detail="User not found")
     return None
+
+#used for testing with Sonarqube about injection
+@router.get("/search", response_model=UserResponse)
+async def search_user(username: str):
+    result = await user_service.get_user_by_name(username)
+    if result is None:
+        raise HTTPException(status_code=404, detail="User not found 444")
+    return result
