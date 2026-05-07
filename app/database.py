@@ -26,4 +26,4 @@ def get_database():
     return db_instance.db
 
 #test secret key
-my_context = 'CORP-key-89383'
+# my_context = ''

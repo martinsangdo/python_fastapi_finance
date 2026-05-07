@@ -1,0 +1,14 @@
+# Rule 1
+[[rules]]
+    id = "internal-api-key"
+    description = "Detected a company internal API key"
+    # (?i) makes it case-insensitive, and {1,20} allows between 1 and 20 characters
+    regex = '''(?i)CORP-KEY-[a-zA-Z0-9]{1,20}'''
+    keywords = ["corp-key"]
+
+# Rule 2
+[[rules]]
+    id = "project-codename"
+    description = "Do not leak the secret project codename"
+    regex = '''(Skyfall|Project-X|Omega-Red)'''
+    keywords = ["skyfall", "project-x", "omega"]
