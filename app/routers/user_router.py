@@ -37,6 +37,14 @@ async def delete_user(user_id: str):
 #used for testing with Sonarqube about injection
 @router.get("/search", response_model=UserResponse)
 async def search_user(username: str):
+    # DANGEROUS: Converting a user-provided string into a Dictionary
+    # This is what SonarCloud is looking for!
+    try:
+        # If user sends: {"$ne": null}, this becomes a real Mongo operator
+        _query= json.loads(username) 
+    except:
+        _query = username
+
     result = await user_service.get_user_by_name(username)
     if result is None:
         raise HTTPException(status_code=404, detail="User not found 444")
