@@ -24,3 +24,6 @@ async def close_mongo_connection():
 
 def get_database():
     return db_instance.db
+
+#test secret key
+my_context = 'CORP-key-89383'
