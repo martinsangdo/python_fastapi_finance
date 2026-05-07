@@ -6,7 +6,7 @@ pydantic-settings
 python-dotenv
 jinja2
 #security issue for Dependabot
-Django==1.11.28
+Django==4.2.30
 Jinja2==2.10.1
 requests==2.6.0
 pyyaml==5.3
