@@ -1,0 +1,36 @@
+# stackhawk.yml
+app:
+  # The Application ID found in your StackHawk dashboard
+  applicationId: xxx
+  env: Development
+  
+  # The URL where your FastAPI app is running (local or staging)
+  host: http://localhost:8000 
+
+  # FastAPI automatically generates this. 
+  # This tells StackHawk how to "talk" to your MVC Controllers.
+  openApiConf:
+    path: /openapi.json
+
+  # Advanced: NoSQL Injection Testing
+  # This ensures the scanner focuses on MongoDB-specific attack patterns.
+  autoPolicy: true
+  technology:
+    - Python
+    - MongoDB
+
+  # If your API requires a JWT to access certain routes:
+  # authentication:
+  #   loggedInIndicator: "HTTP.*200"
+  #   loggedOutIndicator: "HTTP.*401"
+  #   tokenAuthorization:
+  #     header: Authorization
+  #     scheme: Bearer
+  #     # You can pass a test token via environment variable
+  #     value: ${TEST_JWT_TOKEN}
+
+# Configuration for the HawkScan engine
+hawk:
+  spider:
+    # Since we use OpenAPI, we don't need to 'crawl' the site deeply
+    baseConfig: "api"
