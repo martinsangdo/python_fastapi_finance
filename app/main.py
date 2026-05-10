@@ -9,7 +9,7 @@ from telemetry import setup_telemetry
 app = FastAPI(title="FastAPI MVC MongoDB Project")
 
 setup_telemetry(app)
-Instrumentator().instrument(app).expose(app)
+Instrumentator().instrument(app).expose(app)    #middleware of prometheus to create the GET endpoint /metrics
 
 from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
