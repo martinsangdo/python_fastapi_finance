@@ -3,6 +3,8 @@ from bson import ObjectId
 from app.database import get_database
 from app.schemas.user import UserModel, UserCreate, UserUpdate, UserResponse
 from datetime import datetime
+import logging
+logger = logging.getLogger("fastapi-server")
 
 class UserService:
     def __init__(self):
@@ -11,6 +13,7 @@ class UserService:
     async def get_all_users(self) -> List[UserResponse]:
         db = get_database()
         users_raw = await db[self.collection_name].find().to_list(1000)
+        logger.critical(f"Found all users")
         return [UserResponse(**user) for user in users_raw]
 
     async def create_user(self, user_data: UserCreate) -> UserResponse:
