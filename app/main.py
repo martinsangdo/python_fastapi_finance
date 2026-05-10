@@ -2,8 +2,11 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from app.database import connect_to_mongo, close_mongo_connection
 from app.routers import user_router, home_router
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="FastAPI MVC MongoDB Project")
+
+Instrumentator().instrument(app).expose(app)
 
 from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
