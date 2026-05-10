@@ -1,0 +1,24 @@
+# Global configurations
+global:
+  scrape_interval: 15s     # How often to pull metrics from targets (default is 1m)
+  evaluation_interval: 15s # How often to evaluate alerting rules
+
+# Alerting rules (Optional - for when you set up Alertmanager later)
+rule_files:
+  # - "first_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to monitor:
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "fastapi-backend"
+    
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      # This is where your FastAPI app is running. 
+      # Since you aren't using Docker, 'localhost' works perfectly.
+      - targets: ["127.0.0.1:8000"]
+        labels:
+          env: "development"
+          team: "student-group-1"
