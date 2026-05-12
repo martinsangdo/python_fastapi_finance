@@ -6,15 +6,30 @@ from datetime import datetime
 import logging
 logger = logging.getLogger("fastapi-server")
 
+from app.utils.tracer_wrapper import trace_function
+from opentelemetry import trace
+tracer = trace.get_tracer(__name__)
+
 class UserService:
     def __init__(self):
         self.collection_name = "users"
 
+    @trace_function(name="UserService.get_all_users")
     async def get_all_users(self) -> List[UserResponse]:
-        db = get_database()
-        users_raw = await db[self.collection_name].find().to_list(1000)
+        # 1. Database Fetch Step
+        with tracer.start_as_current_span("Mongo.FetchRaw"):
+            db = get_database()
+            # It's better to reuse a global client than calling get_database() inside the loop
+            users_raw = await db[self.collection_name].find().to_list(1000)
+        
         logger.critical(f"Found all users")
-        return [UserResponse(**user) for user in users_raw]
+
+        # 2. Data Transformation Step (The likely bottleneck)
+        with tracer.start_as_current_span("Pydantic.Serialization"):
+            # This is where Python spends CPU time converting Dicts to Objects
+            results = [UserResponse(**user) for user in users_raw]
+            
+        return results
 
     async def create_user(self, user_data: UserCreate) -> UserResponse:
         db = get_database()
