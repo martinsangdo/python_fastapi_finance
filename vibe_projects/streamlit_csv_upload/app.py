@@ -232,7 +232,7 @@ def style_figure(fig: go.Figure, height: int = 380) -> go.Figure:
 
 
 def show(fig: go.Figure, height: int = 380) -> None:
-    st.plotly_chart(style_figure(fig, height), use_container_width=True)
+    st.plotly_chart(style_figure(fig, height), width="stretch")
 
 
 def chunk(items: Sequence, size: int) -> Iterable[Sequence]:
@@ -291,7 +291,7 @@ def render_schema(profile: DatasetProfile) -> None:
             for c in profile.columns
         ]
     )
-    st.dataframe(schema, use_container_width=True, hide_index=True)
+    st.dataframe(schema, width="stretch", hide_index=True)
 
     incomplete = schema[schema["Missing"] > 0].sort_values("Missing %", ascending=False)
     if not incomplete.empty:
@@ -313,14 +313,14 @@ def render_schema(profile: DatasetProfile) -> None:
 def render_preview(profile: DatasetProfile) -> None:
     st.subheader("Data preview")
     st.caption(f"First {min(MAX_PREVIEW_ROWS, profile.n_rows):,} rows.")
-    st.dataframe(profile.frame.head(MAX_PREVIEW_ROWS), use_container_width=True)
+    st.dataframe(profile.frame.head(MAX_PREVIEW_ROWS), width="stretch")
 
     numeric = profile.numeric
     if numeric:
         st.markdown("**Descriptive statistics**")
         stats = profile.frame[numeric].describe().T
         stats["missing"] = profile.frame[numeric].isna().sum()
-        st.dataframe(stats.round(3), use_container_width=True)
+        st.dataframe(stats.round(3), width="stretch")
 
 
 def render_numeric(profile: DatasetProfile) -> None:
@@ -391,7 +391,7 @@ def render_categorical(profile: DatasetProfile) -> None:
             fig = px.pie(counts, names=column, values="Count", hole=0.45, title="Composition")
             show(fig, height=max(320, 28 * len(counts)))
         else:
-            st.dataframe(counts, use_container_width=True, hide_index=True)
+            st.dataframe(counts, width="stretch", hide_index=True)
 
     numeric = profile.numeric
     if numeric:
@@ -404,7 +404,7 @@ def render_categorical(profile: DatasetProfile) -> None:
             .head(TOP_N_CATEGORIES)
             .reset_index()
         )
-        st.dataframe(grouped.round(3), use_container_width=True, hide_index=True)
+        st.dataframe(grouped.round(3), width="stretch", hide_index=True)
         fig = px.bar(
             grouped,
             x=grouped.columns[0],
