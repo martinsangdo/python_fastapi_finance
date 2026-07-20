@@ -28,7 +28,7 @@ fastapi_template/
 
 | File | Purpose |
 | --- | --- |
-| `app.py` | Creates the FastAPI app, serves `/static`, and defines the `/`, `/products`, and `/health` routes. |
+| `app.py` | Creates the FastAPI app, serves `/static`, and defines the `/`, `/products`, `/api/products`, and `/health` routes. |
 | `database.py` | Reads `DATABASE_URL` from `.env` and builds the SQLAlchemy engine, session, and `Base` class. |
 | `models.py` | The `Product` class, which maps to the existing `products` table. |
 | `templates/index.html` | The welcome page. |
@@ -93,6 +93,7 @@ handy while developing.
 Other useful URLs:
 
 - <http://127.0.0.1:8000/products> — the product list
+- <http://127.0.0.1:8000/api/products> — the same list as JSON
 - <http://127.0.0.1:8000/health> — returns `{"status": "ok"}`
 - <http://127.0.0.1:8000/docs> — auto-generated API documentation
 
@@ -116,6 +117,24 @@ sku = Column(String, primary_key=True)
 
 Empty (NULL) values display as a dash. On a narrow screen the table scrolls
 sideways inside its box so the page itself never scrolls horizontally.
+
+## The JSON API
+
+`/api/products` returns the same rows as JSON, for front ends that render in the
+browser rather than on the server:
+
+```json
+[{ "id": 1, "sku": "ELEC-USB-C-CABLE", "name": "USB-C Cable", "price": 8.5 }]
+```
+
+The response shape is the `ProductOut` model in `app.py`, not the table itself,
+so adding a column does not automatically publish it. `price` is declared
+`float` so it serialises as a JSON number rather than a quoted `Decimal`.
+
+Browsers block cross-origin requests unless the API opts in, so `app.py` adds
+`CORSMiddleware` listing the origins allowed to call it — currently port 5500,
+where `../fe_ecommerce` is served. Serving that front end from a different port
+means adding that origin to the list.
 
 ## Next steps
 
