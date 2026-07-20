@@ -1,0 +1,43 @@
+/* Simple, responsive styling. No framework needed. */
+
+/* Reset a few browser defaults so the layout is predictable. */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Use the system font so the page looks native on every device. */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.6;
+
+    /* Flexbox centers the card both horizontally and vertically. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+.card {
+    /* Never wider than 32rem, but shrinks freely on small screens. */
+    width: 100%;
+    max-width: 32rem;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+}
+
+h1 {
+    /* clamp() scales the heading with the screen: min, preferred, max. */
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    margin-bottom: 0.75rem;
+}
+
+p {
+    color: #555555;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This line makes the page scale correctly on phones. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <!-- url_for() builds the correct path to our CSS file. -->
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <main class="card">
+        <h1>Hello, World!</h1>
+        <!-- The placeholder below is replaced by the value passed from app.py -->
+        <p>{{ message }}</p>
+    </main>
+</body>
+</html>
