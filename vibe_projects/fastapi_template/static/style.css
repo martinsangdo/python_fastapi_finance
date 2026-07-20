@@ -14,22 +14,34 @@ body {
     color: #1a1a1a;
     line-height: 1.6;
 
-    /* Flexbox centers the card both horizontally and vertically. */
     display: flex;
-    align-items: center;
     justify-content: center;
     min-height: 100vh;
     padding: 1.5rem;
+
+    /* Vertically centered by default (used by the welcome page). */
+    align-items: center;
 }
 
+/* The products page is long, so start it at the top instead of centering it. */
+body.page {
+    align-items: flex-start;
+}
+
+/* The welcome page: a small centered box. */
 .card {
-    /* Never wider than 32rem, but shrinks freely on small screens. */
     width: 100%;
     max-width: 32rem;
     text-align: center;
     padding: 2.5rem 2rem;
     border: 1px solid #e5e5e5;
     border-radius: 12px;
+}
+
+/* The products page: a wider column of content. */
+.content {
+    width: 100%;
+    max-width: 60rem;
 }
 
 h1 {
@@ -40,4 +52,62 @@ h1 {
 
 p {
     color: #555555;
+}
+
+a {
+    color: #1a5fb4;
+}
+
+/* ---------- Products table ---------- */
+
+/* On a narrow screen the table scrolls sideways inside this box,
+   so the page itself never scrolls horizontally. */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+}
+
+table {
+    /* Collapse removes the double lines between cells. */
+    border-collapse: collapse;
+    width: 100%;
+    /* Keeps columns readable rather than squashing them when scrolling. */
+    min-width: 44rem;
+}
+
+th,
+td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    /* A line under every row except the last one. */
+    border-bottom: 1px solid #eeeeee;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+thead th {
+    background-color: #fafafa;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #666666;
+}
+
+/* Keep the SKU on a single line so it stays easy to read. */
+th:first-child,
+td:first-child {
+    white-space: nowrap;
+}
+
+/* Numbers read more easily when right-aligned. */
+.number {
+    text-align: right;
+}
+
+.empty {
+    margin: 1.5rem 0;
 }

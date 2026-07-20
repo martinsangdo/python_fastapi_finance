@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body class="page">
+    <main class="content">
+        <h1>Products</h1>
+
+        {% if products %}
+            <!-- The wrapper lets the table scroll sideways on narrow screens
+                 instead of stretching the whole page. -->
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th class="number">Price</th>
+                            <th class="number">Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop once per product returned by the route. -->
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ product.sku }}</td>
+                            <td>{{ product.name }}</td>
+                            <!-- Empty values in the database show as a dash
+                                 instead of the word "None". -->
+                            <td>{{ product.description or "—" }}</td>
+                            <td>{{ product.category_id or "—" }}</td>
+                            <!-- Show the price with exactly two decimals. -->
+                            <td class="number">
+                                {{ "%.2f"|format(product.price) if product.price is not none else "—" }}
+                            </td>
+                            <td class="number">{{ product.stock_quantity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <!-- Shown when the table is empty. -->
+            <p class="empty">No products found.</p>
+        {% endif %}
+
+        <p><a href="/">Back to home</a></p>
+    </main>
+</body>
+</html>

@@ -5,9 +5,13 @@ This is the entry point of the web app. Run it with:
     uvicorn app:app --reload
 """
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from sqlalchemy.orm import Session
+
+from database import get_db
+from models import Product
 
 # Create the FastAPI application.
 # The title shows up in the auto-generated API docs at http://127.0.0.1:8000/docs
@@ -32,6 +36,23 @@ def home(request: Request):
         request=request,
         name="index.html",
         context={"message": "Your FastAPI app is running."},
+    )
+
+
+@app.get("/products")
+def list_products(request: Request, db: Session = Depends(get_db)):
+    """Show every row from the "products" table.
+
+    `Depends(get_db)` asks FastAPI to open a database session before this
+    function runs, and to close it afterwards. We never open it by hand.
+    """
+    # SELECT * FROM products ORDER BY name
+    products = db.query(Product).order_by(Product.name).all()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="products.html",
+        context={"products": products},
     )
 
 
