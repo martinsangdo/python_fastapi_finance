@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products — FE Ecommerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html">FE&nbsp;Ecommerce</a>
+            <nav class="nav" aria-label="Main">
+                <a class="nav-link is-active" href="index.html">Products</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" id="main">
+        <h1 class="page-title">Products</h1>
+
+        <!--
+            One container per view state. Exactly one is visible at a time;
+            script.js flips them via the `hidden` attribute.
+        -->
+        <p class="state state-loading" id="loading" role="status">Loading products…</p>
+
+        <div class="state state-error" id="error" role="alert" hidden>
+            <p class="state-message" id="error-message">Could not load products.</p>
+            <button class="button" type="button" id="retry">Try again</button>
+        </div>
+
+        <p class="state state-empty" id="empty" hidden>No products available yet.</p>
+
+        <ul class="product-grid" id="product-grid" hidden></ul>
+    </main>
+
+    <!--
+        Card markup lives in a template so rendering is cloning + filling,
+        never string concatenation. Adding a field is a change in two places:
+        here and in fillProductCard() in script.js.
+    -->
+    <template id="product-card-template">
+        <li class="product-card">
+            <p class="product-sku" data-field="sku"></p>
+            <h2 class="product-name" data-field="name"></h2>
+            <p class="product-price" data-field="price"></p>
+        </li>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>

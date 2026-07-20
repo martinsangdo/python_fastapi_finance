@@ -1,0 +1,237 @@
+/* ==========================================================================
+   Design tokens
+   Every value used more than once lives here, so a restyle is a one-file edit.
+   ========================================================================== */
+
+:root {
+    --color-bg: #f7f8fa;
+    --color-surface: #ffffff;
+    --color-border: #e3e6ea;
+    --color-text: #1c2024;
+    --color-text-muted: #6b7280;
+    --color-accent: #2e74b5;
+    --color-error: #b42318;
+    --color-error-bg: #fef3f2;
+
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+
+    --radius: 10px;
+    --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.1);
+    --container-width: 1100px;
+
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #16181c;
+        --color-surface: #1e2126;
+        --color-border: #2f343b;
+        --color-text: #e8eaed;
+        --color-text-muted: #9aa3ad;
+        --color-accent: #6aa9e0;
+        --color-error: #ff9a92;
+        --color-error-bg: #2c1c1b;
+        --shadow: none;
+    }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.site-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    min-height: 60px;
+}
+
+.brand {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+}
+
+.nav {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.nav-link {
+    color: var(--color-text-muted);
+    font-size: 0.925rem;
+    text-decoration: none;
+    padding: var(--space-xs) 0;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--color-text);
+}
+
+.nav-link.is-active {
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent);
+}
+
+/* ==========================================================================
+   Page
+   ========================================================================== */
+
+.page-title {
+    margin: var(--space-xl) 0 var(--space-lg);
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   View states (loading / error / empty)
+   ========================================================================== */
+
+.state {
+    margin: 0 0 var(--space-xl);
+    color: var(--color-text-muted);
+}
+
+.state-loading::after {
+    /* Dots animate so a slow request still looks alive. */
+    content: "";
+    display: inline-block;
+    width: 1em;
+    text-align: left;
+    animation: ellipsis 1.2s steps(4, end) infinite;
+}
+
+@keyframes ellipsis {
+    0%   { content: ""; }
+    25%  { content: "."; }
+    50%  { content: ".."; }
+    75%  { content: "..."; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .state-loading::after {
+        animation: none;
+    }
+}
+
+.state-error {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-error-bg);
+    border: 1px solid var(--color-error);
+    border-radius: var(--radius);
+    color: var(--color-error);
+}
+
+.state-message {
+    margin: 0 0 var(--space-md);
+    font-weight: 500;
+}
+
+.button {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.925rem;
+    cursor: pointer;
+}
+
+.button:hover {
+    filter: brightness(1.08);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Product grid
+   ========================================================================== */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: var(--space-md);
+    margin: 0 0 var(--space-xl);
+    padding: 0;
+    list-style: none;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.product-sku {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.product-name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.product-price {
+    margin: auto 0 0;
+    padding-top: var(--space-sm);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-accent);
+}
