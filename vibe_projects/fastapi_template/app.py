@@ -8,7 +8,7 @@ This is the entry point of the web app. Run it with:
 from fastapi import Depends, FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from database import get_db
 from models import Product
@@ -46,8 +46,15 @@ def list_products(request: Request, db: Session = Depends(get_db)):
     `Depends(get_db)` asks FastAPI to open a database session before this
     function runs, and to close it afterwards. We never open it by hand.
     """
-    # SELECT * FROM products ORDER BY name
-    products = db.query(Product).order_by(Product.name).all()
+    # SELECT * FROM products LEFT JOIN categories ... ORDER BY name
+    # joinedload pulls each product's category in the same query, instead of
+    # firing one extra query per row when the template reads it.
+    products = (
+        db.query(Product)
+        .options(joinedload(Product.category))
+        .order_by(Product.name)
+        .all()
+    )
 
     return templates.TemplateResponse(
         request=request,

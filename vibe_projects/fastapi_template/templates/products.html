@@ -21,6 +21,7 @@
                             <th>Name</th>
                             <th>Description</th>
                             <th>Category</th>
+                            <th>Category Name</th>
                             <th class="number">Price</th>
                             <th class="number">Stock</th>
                         </tr>
@@ -35,6 +36,9 @@
                                  instead of the word "None". -->
                             <td>{{ product.description or "—" }}</td>
                             <td>{{ product.category_id or "—" }}</td>
+                            <!-- product.category is None when category_id is
+                                 empty or points at a missing row. -->
+                            <td>{{ product.category.name if product.category else "—" }}</td>
                             <!-- Show the price with exactly two decimals. -->
                             <td class="number">
                                 {{ "%.2f"|format(product.price) if product.price is not none else "—" }}
