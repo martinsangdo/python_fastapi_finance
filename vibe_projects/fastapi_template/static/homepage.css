@@ -1,0 +1,499 @@
+/* Styles for homepage.html.
+ *
+ * The values below come from the Figma file's "Simple Design System"
+ * variables, so the token names match what a designer sees in Figma.
+ * This file is standalone — homepage.html does not load style.css,
+ * because that one centres the whole <body> and this page is full-bleed. */
+
+:root {
+    /* ---------- Colour ---------- */
+    --sds-color-background-default-default: #ffffff;
+    --sds-color-background-default-secondary: #f5f5f5;
+    --sds-color-background-brand-default: #2c2c2c;
+    --sds-color-background-brand-tertiary: #f5f5f5;
+    --sds-color-background-neutral-tertiary: #e3e3e3;
+    --sds-color-border-default-default: #d9d9d9;
+    --sds-color-border-neutral-secondary: #767676;
+    --sds-color-border-brand-default: #2c2c2c;
+    --sds-color-text-default-default: #1e1e1e;
+    --sds-color-text-default-secondary: #757575;
+    --sds-color-text-brand-on-brand: #f5f5f5;
+    --sds-color-slate-200: #e3e3e3;
+
+    /* ---------- Spacing (the scale is named after 1/100 of a rem) ---------- */
+    --sds-size-space-200: 8px;
+    --sds-size-space-300: 12px;
+    --sds-size-space-400: 16px;
+    --sds-size-space-600: 24px;
+    --sds-size-space-800: 32px;
+    --sds-size-space-1200: 48px;
+    --sds-size-space-1600: 64px;
+    --sds-size-space-4000: 160px;
+
+    /* ---------- Shape ---------- */
+    --sds-size-radius-200: 8px;
+    --sds-size-stroke-border: 1px;
+
+    /* ---------- Type ---------- */
+    --sds-typography-body-font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --sds-typography-body-size-medium: 16px;
+    --sds-typography-body-font-weight-regular: 400;
+    --sds-typography-body-font-weight-strong: 600;
+    --sds-typography-heading-size-base: 24px;
+    --sds-typography-heading-font-weight: 600;
+    --sds-typography-subheading-size-medium: 20px;
+    --sds-typography-subtitle-size-base: 32px;
+    --sds-typography-title-hero-size: 72px;
+    --sds-typography-title-hero-font-weight: 700;
+
+    /* The design system's target page width. */
+    --sds-responsive-device-width: 1200px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--sds-typography-body-font-family);
+    font-size: var(--sds-typography-body-size-medium);
+    color: var(--sds-color-text-default-default);
+    background-color: var(--sds-color-background-default-default);
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Every band of the page lines its content up on the same 1200px column. */
+.container {
+    width: 100%;
+    max-width: var(--sds-responsive-device-width);
+    margin: 0 auto;
+}
+
+/* Keyboard users need to see where they are; the design has no focus style. */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--sds-color-text-default-default);
+    outline-offset: 2px;
+}
+
+/* ---------- Buttons ---------- */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sds-size-space-200);
+    padding: var(--sds-size-space-300);
+    border: var(--sds-size-stroke-border) solid transparent;
+    border-radius: var(--sds-size-radius-200);
+    font: inherit;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* "Small" buttons (the header pair) use the 8px padding step. */
+.button--small {
+    padding: var(--sds-size-space-200);
+}
+
+.button--neutral {
+    background-color: var(--sds-color-background-neutral-tertiary);
+    border-color: var(--sds-color-border-neutral-secondary);
+    color: var(--sds-color-text-default-default);
+}
+
+.button--primary {
+    background-color: var(--sds-color-background-brand-default);
+    border-color: var(--sds-color-border-brand-default);
+    color: var(--sds-color-text-brand-on-brand);
+}
+
+/* ---------- Header ---------- */
+
+.header {
+    border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    background-color: var(--sds-color-background-default-default);
+}
+
+.header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sds-size-space-600);
+    padding: var(--sds-size-space-800);
+}
+
+.header__logo img {
+    width: 26.83px;
+    height: 38.5px;
+}
+
+/* The nav grows to fill the row so the links sit next to the auth buttons. */
+.nav {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sds-size-space-200);
+}
+
+.nav__link {
+    display: block;
+    padding: var(--sds-size-space-200);
+    border-radius: var(--sds-size-radius-200);
+    color: var(--sds-color-text-default-default);
+    line-height: 1;
+    text-decoration: none;
+}
+
+/* The "Active" pill state from the design. */
+.nav__link.is-active {
+    background-color: var(--sds-color-background-brand-tertiary);
+}
+
+.header__auth {
+    display: flex;
+    align-items: center;
+    gap: var(--sds-size-space-300);
+    width: 178px;
+}
+
+.header__auth .button {
+    flex: 1 0 0;
+    min-width: 0;
+}
+
+/* Shown only on narrow screens, where the nav collapses (see the JS). */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    border-radius: var(--sds-size-radius-200);
+    padding: var(--sds-size-space-200) var(--sds-size-space-300);
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+    background-color: var(--sds-color-background-default-secondary);
+}
+
+.hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sds-size-space-200);
+    padding: var(--sds-size-space-4000) var(--sds-size-space-1600);
+}
+
+.hero__title {
+    font-size: var(--sds-typography-title-hero-size);
+    font-weight: var(--sds-typography-title-hero-font-weight);
+    line-height: 1.2;
+    /* Figma's -3% tracking at 72px. */
+    letter-spacing: -2.16px;
+}
+
+.hero__subtitle {
+    font-size: var(--sds-typography-subtitle-size-base);
+    line-height: 1.2;
+    color: var(--sds-color-text-default-secondary);
+}
+
+/* ---------- Image placeholders ---------- */
+
+/* A flat grey block with the placeholder glyph faded on top of it. */
+.placeholder {
+    background-color: var(--sds-color-slate-200);
+    overflow: hidden;
+}
+
+.placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.2;
+}
+
+/* ---------- Double image panel ---------- */
+
+.panel-double {
+    display: flex;
+    gap: var(--sds-size-space-1200);
+    padding: var(--sds-size-space-1600);
+    opacity: 0.8;
+}
+
+.panel-double .placeholder {
+    flex: 1 0 0;
+    min-width: 0;
+    height: 350px;
+}
+
+/* ---------- Section heading ---------- */
+
+.section {
+    padding: var(--sds-size-space-1600);
+}
+
+.section__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sds-size-space-200);
+    margin-bottom: var(--sds-size-space-1200);
+}
+
+.section__heading h2 {
+    font-size: var(--sds-typography-heading-size-base);
+    font-weight: var(--sds-typography-heading-font-weight);
+    line-height: 1.2;
+    letter-spacing: -0.48px;
+}
+
+.section__heading p {
+    font-size: var(--sds-typography-subheading-size-medium);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--sds-color-text-default-secondary);
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--sds-size-space-600);
+    padding: var(--sds-size-space-600);
+    background-color: var(--sds-color-background-default-default);
+    border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    border-radius: var(--sds-size-radius-200);
+}
+
+.card__image {
+    width: 160px;
+    height: 160px;
+    /* min-width stops the image shrinking before the text wraps below it. */
+    min-width: 160px;
+    flex-shrink: 0;
+}
+
+.card__body {
+    flex: 1 0 0;
+    /* 160px is the point at which the text drops under the image. */
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sds-size-space-400);
+}
+
+.card__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sds-size-space-200);
+    width: 100%;
+}
+
+.card__text h3 {
+    font-size: var(--sds-typography-heading-size-base);
+    font-weight: var(--sds-typography-heading-font-weight);
+    line-height: 1.2;
+    letter-spacing: -0.48px;
+}
+
+.card__text p {
+    line-height: 1.4;
+    color: var(--sds-color-text-default-secondary);
+}
+
+/* One card per row, stacked. */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sds-size-space-600);
+}
+
+/* Three cards per row. */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sds-size-space-1200);
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+    border-top: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--sds-size-space-400);
+    padding: var(--sds-size-space-800);
+}
+
+.footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sds-size-space-600);
+    width: 262px;
+    min-width: 240px;
+}
+
+.footer__brand > img {
+    width: 26.83px;
+    height: 38.5px;
+}
+
+.footer__social {
+    display: flex;
+    align-items: center;
+    gap: var(--sds-size-space-400);
+}
+
+.footer__social a {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.footer__social img {
+    width: 24px;
+    height: 24px;
+}
+
+.footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sds-size-space-400);
+    flex: 1 0 0;
+    min-width: 0;
+}
+
+.link-list {
+    width: 262px;
+    min-width: 160px;
+}
+
+.link-list h3 {
+    font-size: var(--sds-typography-body-size-medium);
+    font-weight: var(--sds-typography-body-font-weight-strong);
+    line-height: 1.4;
+    /* 38px title block + 12px = the 50px offset in the design. */
+    margin-bottom: 28px;
+}
+
+.link-list li + li {
+    margin-top: var(--sds-size-space-300);
+}
+
+.link-list a {
+    color: var(--sds-color-text-default-default);
+    line-height: 1.4;
+    text-decoration: none;
+}
+
+.link-list a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 900px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--sds-size-space-600);
+    }
+
+    .panel-double {
+        flex-direction: column;
+    }
+
+    .panel-double .placeholder {
+        height: 220px;
+    }
+}
+
+@media (max-width: 720px) {
+    .nav-toggle {
+        display: block;
+        order: 3;
+    }
+
+    /* Collapsed by default; the toggle button re-shows it. */
+    .nav {
+        order: 4;
+        flex-basis: 100%;
+        display: none;
+    }
+
+    .nav.is-open {
+        display: block;
+    }
+
+    .nav__list {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header__auth {
+        order: 2;
+        margin-left: auto;
+    }
+
+    .hero__inner {
+        padding: var(--sds-size-space-1600) var(--sds-size-space-600);
+    }
+
+    .hero__title {
+        font-size: 44px;
+        letter-spacing: -1.32px;
+    }
+
+    .hero__subtitle {
+        font-size: 24px;
+    }
+
+    .section,
+    .panel-double,
+    .footer__inner,
+    .header__inner {
+        padding: var(--sds-size-space-600);
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__brand,
+    .link-list {
+        width: 100%;
+    }
+}

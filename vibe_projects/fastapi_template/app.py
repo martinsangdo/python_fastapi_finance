@@ -55,6 +55,12 @@ def home(request: Request):
     )
 
 
+@app.get("/homepage")
+def homepage(request: Request):
+    """Show the marketing home page built from the Figma design."""
+    return templates.TemplateResponse(request=request, name="homepage.html")
+
+
 @app.get("/products")
 def list_products(request: Request, db: Session = Depends(get_db)):
     """Show every row from the "products" table.

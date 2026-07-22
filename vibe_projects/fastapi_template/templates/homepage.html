@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='homepage.css') }}">
+</head>
+<body>
+    <!-- ---------- Header ---------- -->
+    <header class="header">
+        <div class="container header__inner">
+            <a class="header__logo" href="/" aria-label="Home">
+                <img src="{{ url_for('static', path='img/figma-logo.svg') }}" alt="" width="27" height="39">
+            </a>
+
+            <!-- Only visible on small screens; the JS below opens the nav. -->
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+                Menu
+            </button>
+
+            <nav class="nav" id="primary-nav" aria-label="Primary">
+                <ul class="nav__list">
+                    <li><a class="nav__link is-active" href="#products">Products</a></li>
+                    <li><a class="nav__link" href="#solutions">Solutions</a></li>
+                    <li><a class="nav__link" href="#community">Community</a></li>
+                    <li><a class="nav__link" href="#resources">Resources</a></li>
+                    <li><a class="nav__link" href="#pricing">Pricing</a></li>
+                    <li><a class="nav__link" href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__auth">
+                <a class="button button--small button--neutral" href="#signin">Sign in</a>
+                <a class="button button--small button--primary" href="#register">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ---------- Hero ---------- -->
+        <section class="hero">
+            <div class="container hero__inner">
+                <h1 class="hero__title">Title</h1>
+                <p class="hero__subtitle">Subtitle</p>
+            </div>
+        </section>
+
+        <!-- ---------- Two side-by-side images ---------- -->
+        <section class="container panel-double">
+            <div class="placeholder">
+                <img src="{{ url_for('static', path='img/image-placeholder.png') }}" alt="">
+            </div>
+            <div class="placeholder">
+                <img src="{{ url_for('static', path='img/image-placeholder.png') }}" alt="">
+            </div>
+        </section>
+
+        <!-- ---------- Stacked cards, each with a button ---------- -->
+        <section class="container section">
+            <div class="section__heading">
+                <h2>Heading</h2>
+                <p>Subheading</p>
+            </div>
+
+            <div class="card-list">
+                <!-- The three cards are identical; edit the text in place, or
+                     loop over a list passed in from app.py. -->
+                {% for _ in range(3) %}
+                <article class="card">
+                    <div class="card__image placeholder">
+                        <img src="{{ url_for('static', path='img/image-placeholder.png') }}" alt="">
+                    </div>
+                    <div class="card__body">
+                        <div class="card__text">
+                            <h3>Title</h3>
+                            <p>Body text for whatever you&rsquo;d like to say. Add main takeaway
+                               points, quotes, anecdotes, or even a very very short story.</p>
+                        </div>
+                        <div class="card__actions">
+                            <a class="button button--neutral" href="#">Button</a>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- ---------- Six cards in a three-column grid ---------- -->
+        <section class="container section">
+            <div class="section__heading">
+                <h2>Heading</h2>
+                <p>Subheading</p>
+            </div>
+
+            <div class="card-grid">
+                {% for _ in range(6) %}
+                <article class="card">
+                    <div class="card__image placeholder">
+                        <img src="{{ url_for('static', path='img/image-placeholder.png') }}" alt="">
+                    </div>
+                    <div class="card__body">
+                        <div class="card__text">
+                            <h3>Title</h3>
+                            <p>Body text for whatever you&rsquo;d like to say. Add main takeaway
+                               points, quotes, anecdotes, or even a very very short story.</p>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- ---------- Footer ---------- -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__brand">
+                <img src="{{ url_for('static', path='img/figma-logo.svg') }}" alt="" width="27" height="39">
+                <div class="footer__social">
+                    <a href="#" aria-label="X">
+                        <img src="{{ url_for('static', path='img/logo-x.svg') }}" alt="" width="24" height="24">
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <img src="{{ url_for('static', path='img/logo-instagram.svg') }}" alt="" width="24" height="24">
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <img src="{{ url_for('static', path='img/logo-youtube.svg') }}" alt="" width="24" height="24">
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <img src="{{ url_for('static', path='img/logo-linkedin.svg') }}" alt="" width="24" height="24">
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer__links">
+                <div class="link-list">
+                    <h3>Use cases</h3>
+                    <ul>
+                        <li><a href="#">UI design</a></li>
+                        <li><a href="#">UX design</a></li>
+                        <li><a href="#">Wireframing</a></li>
+                        <li><a href="#">Diagramming</a></li>
+                        <li><a href="#">Brainstorming</a></li>
+                        <li><a href="#">Online whiteboard</a></li>
+                        <li><a href="#">Team collaboration</a></li>
+                    </ul>
+                </div>
+
+                <div class="link-list">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Prototyping</a></li>
+                        <li><a href="#">Development features</a></li>
+                        <li><a href="#">Design systems</a></li>
+                        <li><a href="#">Collaboration features</a></li>
+                        <li><a href="#">Design process</a></li>
+                        <li><a href="#">FigJam</a></li>
+                    </ul>
+                </div>
+
+                <div class="link-list">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Best practices</a></li>
+                        <li><a href="#">Colors</a></li>
+                        <li><a href="#">Color wheel</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Developers</a></li>
+                        <li><a href="#">Resource library</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Two small behaviours, nothing else on the page needs JavaScript.
+        (function () {
+            // 1. The menu button opens and closes the nav on narrow screens.
+            var toggle = document.querySelector('.nav-toggle');
+            var nav = document.querySelector('.nav');
+
+            toggle.addEventListener('click', function () {
+                var isOpen = nav.classList.toggle('is-open');
+                // Tell screen readers whether the nav is showing.
+                toggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            // 2. Clicking a nav link moves the grey "Active" pill onto it.
+            var links = document.querySelectorAll('.nav__link');
+
+            Array.prototype.forEach.call(links, function (link) {
+                link.addEventListener('click', function () {
+                    Array.prototype.forEach.call(links, function (other) {
+                        other.classList.remove('is-active');
+                    });
+                    link.classList.add('is-active');
+                    // On mobile, close the menu again after choosing.
+                    nav.classList.remove('is-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
