@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — FASHION</title>
+
+<!-- Poppins, weights 400 / 500 / 900 only. Loading 600 or 700 collapses the
+     contrast between shouting display type and quiet UI type. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+<!-- Reusable decorative marks. Both are aria-hidden: they carry no meaning. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="mark-star" viewBox="0 0 28 28">
+            <path d="M14 0c1 8 6 13 14 14-8 1-13 6-14 14-1-8-6-13-14-14C8 13 13 8 14 0Z" fill="currentColor"/>
+        </symbol>
+        <symbol id="mark-arrow" viewBox="0 0 16 16">
+            <path d="M1 8h13M9.5 3.5 14 8l-4.5 4.5" fill="none" stroke="currentColor"
+                  stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+        <symbol id="mark-swoosh" viewBox="0 0 155 16">
+            <path d="M3 12C31 5 74 3 108 6c14 1 30 3 44 6" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round"/>
+        </symbol>
+    </defs>
+</svg>
+
+<!-- ============================================================
+     Top navigation
+     ============================================================ -->
+<header class="nav-bar">
+    <div class="container nav-bar__inner">
+        <a class="brand" href="index.html">
+            <!-- Geometric house mark. Replaces the cib:f-secure placeholder
+                 that ships in the community file and must not be used. -->
+            <svg class="brand__mark" viewBox="0 0 17 17" aria-hidden="true">
+                <path d="M0 0h17v4.5H4.8v2.9H15v4.5H4.8V17H0Z" fill="currentColor"/>
+            </svg>
+            <span class="wordmark">Fashion</span>
+        </a>
+
+        <nav class="nav-bar__links" aria-label="Primary">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="shop.html">Shop</a>
+            <a class="nav-link" href="lookbook.html">Lookbook</a>
+            <a class="nav-link" href="journal.html">Journal</a>
+            <a class="nav-link" href="contact.html" aria-current="page">Contact</a>
+        </nav>
+
+        <a class="button button--primary button--sm nav-bar__account" href="account.html">Account</a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">
+            <span class="visually-hidden">Open menu</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none"
+                 stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+                <path d="M2 5h16M2 10h16M2 15h16"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<!-- Full-screen black panel below 1024 — not a dropdown sheet. -->
+<div class="nav-panel on-ink" id="nav-panel" hidden>
+    <button class="nav-panel__close" type="button">
+        <span class="visually-hidden">Close menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none"
+             stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+            <path d="M5 5l14 14M19 5 5 19"/>
+        </svg>
+    </button>
+    <nav class="nav-panel__list" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="lookbook.html">Lookbook</a>
+        <a href="journal.html">Journal</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <a class="button button--primary button--md nav-panel__account" href="account.html">Account</a>
+</div>
+
+<main>
+
+    <!-- ============================================================
+         Hero panel — 45/55, image overflows, four sparkle stars
+         ============================================================ -->
+    <section class="hero">
+        <div class="container">
+            <div class="panel hero__panel">
+                <div class="hero__copy">
+                    <!-- Manually line-broken, 4–8 characters a line, terminal
+                         period on the last line. Never auto-wrapped. -->
+                    <h1 class="display-1 hero__title">
+                        Let&rsquo;s<br>
+                        <span class="mark">talk</span><br>
+                        fashion.
+                    </h1>
+                    <p class="lead">
+                        Questions about an order, a fitting, or a collaboration? A real
+                        person reads every message and replies within one working day.
+                    </p>
+                    <a class="button button--primary button--md hero__cta" href="#message">Write to us</a>
+                </div>
+
+                <div class="hero__figure">
+                    <img class="hero__image" src="img/placeholder-portrait.svg"
+                         alt="" width="242" height="352">
+
+                    <svg class="star star--1" aria-hidden="true"><use href="#mark-star"/></svg>
+                    <svg class="star star--2" aria-hidden="true"><use href="#mark-star"/></svg>
+                    <svg class="star star--3" aria-hidden="true"><use href="#mark-star"/></svg>
+                    <svg class="star star--4" aria-hidden="true"><use href="#mark-star"/></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Accent band — full-bleed. Black on yellow is the only pairing.
+         ============================================================ -->
+    <section class="band bleed" aria-label="Contact details at a glance">
+        <dl class="container band__inner">
+            <div class="band__item">
+                <dt>Email</dt>
+                <dd><a href="mailto:studio@fashion.example">studio@fashion.example</a></dd>
+            </div>
+            <div class="band__item">
+                <dt>Phone</dt>
+                <dd><a href="tel:+842839001100">+84 28 3900 1100</a></dd>
+            </div>
+            <div class="band__item">
+                <dt>Studio hours</dt>
+                <dd>Mon&ndash;Fri, 9:00&ndash;18:00 ICT</dd>
+            </div>
+        </dl>
+    </section>
+
+    <!-- ============================================================
+         Three content cards
+         ============================================================ -->
+    <section class="section" id="help">
+        <div class="container">
+            <div class="section__heading">
+                <h2 class="heading-1">How can we help?</h2>
+                <!-- Every heading-1 carries the hand-drawn underline. -->
+                <svg class="swoosh" viewBox="0 0 155 16" aria-hidden="true"><use href="#mark-swoosh"/></svg>
+            </div>
+
+            <div class="help__grid">
+                <article class="card-content">
+                    <h3 class="heading-2">Customer care</h3>
+                    <p>Orders, sizing, returns and repairs. Have your order number to
+                       hand and we can pull the whole history in one go.</p>
+                    <a class="link-arrow" href="mailto:care@fashion.example">
+                        Email care
+                        <svg aria-hidden="true"><use href="#mark-arrow"/></svg>
+                    </a>
+                </article>
+
+                <article class="card-content">
+                    <h3 class="heading-2">Press &amp; partnerships</h3>
+                    <p>Lookbooks, samples, shoot requests and campaign assets. Please
+                       include your publication and the shoot date.</p>
+                    <a class="link-arrow" href="mailto:press@fashion.example">
+                        Email press
+                        <svg aria-hidden="true"><use href="#mark-arrow"/></svg>
+                    </a>
+                </article>
+
+                <article class="card-content">
+                    <h3 class="heading-2">Wholesale</h3>
+                    <p>Stockist enquiries and line sheets for the current and upcoming
+                       season. Minimums start at twelve pieces.</p>
+                    <a class="link-arrow" href="mailto:wholesale@fashion.example">
+                        Email wholesale
+                        <svg aria-hidden="true"><use href="#mark-arrow"/></svg>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Message form — 45/55, text left, imagery right
+         ============================================================ -->
+    <section class="section" id="message">
+        <div class="container">
+            <div class="section__heading">
+                <h2 class="heading-1">Send a message</h2>
+                <svg class="swoosh" viewBox="0 0 155 16" aria-hidden="true"><use href="#mark-swoosh"/></svg>
+            </div>
+
+            <div class="message__split">
+                <!-- Single column, validated on blur. No backend is wired up yet:
+                     point `action` at your handler when one exists. -->
+                <form class="message__form" action="#" method="post" novalidate>
+                    <div class="field-group">
+                        <div class="field">
+                            <label class="field__label" for="name">
+                                Full name <span class="field__required" aria-hidden="true">*</span>
+                            </label>
+                            <input class="input" id="name" name="name" type="text"
+                                   autocomplete="name" placeholder="Jane Nguyen" required>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="email">
+                                Email <span class="field__required" aria-hidden="true">*</span>
+                            </label>
+                            <input class="input" id="email" name="email" type="email"
+                                   autocomplete="email" placeholder="you@example.com"
+                                   aria-describedby="email-help" required>
+                            <p class="field__help" id="email-help">We reply within one working day.</p>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="subject">Subject</label>
+                            <select class="select" id="subject" name="subject">
+                                <option>General enquiry</option>
+                                <option>Order support</option>
+                                <option>Press &amp; partnerships</option>
+                                <option>Wholesale</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="order">Order number</label>
+                            <input class="input" id="order" name="order" type="text"
+                                   placeholder="FSH-000000" aria-describedby="order-help">
+                            <p class="field__help" id="order-help">Only if your message is about an order.</p>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <div class="field">
+                            <label class="field__label" for="message">
+                                Message <span class="field__required" aria-hidden="true">*</span>
+                            </label>
+                            <textarea class="textarea" id="message" name="message"
+                                      placeholder="Tell us what you need." required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field-group checkbox">
+                        <input id="consent" name="consent" type="checkbox">
+                        <label for="consent">
+                            Send me the seasonal lookbook and studio news. No more than twice a month.
+                        </label>
+                    </div>
+
+                    <div class="form__submit">
+                        <button class="button button--primary button--lg" type="submit">Send message</button>
+                    </div>
+                </form>
+
+                <aside class="message__aside">
+                    <img class="message__image" src="img/placeholder-landscape.svg"
+                         alt="" width="356" height="267">
+
+                    <div class="address-block">
+                        <div>
+                            <h3 class="heading-2">The studio</h3>
+                            <p>
+                                42 Le Thanh Ton<br>
+                                District 1<br>
+                                Ho Chi Minh City<br>
+                                Vietnam
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="heading-2">Opening</h3>
+                            <p>
+                                Mon&ndash;Fri&nbsp;&nbsp;9:00&ndash;18:00<br>
+                                Saturday&nbsp;&nbsp;10:00&ndash;16:00<br>
+                                Sunday closed
+                            </p>
+                            <p style="margin-top:var(--space-3)">
+                                <a href="mailto:studio@fashion.example">studio@fashion.example</a>
+                            </p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Newsletter capture
+         ============================================================ -->
+    <section class="section" id="newsletter">
+        <div class="container newsletter__inner">
+            <h2 class="heading-2">Join the list</h2>
+            <p class="body-sm newsletter__subtitle">New arrivals, private sales and nothing else.</p>
+
+            <form class="newsletter__form" action="#" method="post">
+                <label class="visually-hidden" for="newsletter-email">Email address</label>
+                <input class="input newsletter__input" id="newsletter-email" name="email"
+                       type="email" autocomplete="email" placeholder="Your email address" required>
+                <button class="button button--primary button--sm" type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+<!-- ============================================================
+     Footer — full-bleed black, no divider rules
+     ============================================================ -->
+<footer class="footer bleed on-ink">
+    <div class="container footer__inner">
+        <div class="footer__brand">
+            <span class="wordmark" style="color:var(--surface-inv)">Fashion</span>
+            <p class="body-sm footer__descriptor">
+                An editorial storefront for clothes that are made once, properly, and worn for years.
+            </p>
+
+            <div class="footer__social">
+                <a href="#" aria-label="Instagram">
+                    <svg viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="1" y="1" width="12" height="12" rx="3.5"/>
+                        <circle cx="7" cy="7" r="3"/>
+                        <circle cx="10.6" cy="3.4" r="0.7" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="X">
+                    <svg viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor"
+                         stroke-width="1.5" stroke-linecap="round">
+                        <path d="M2 2l10 10M12 2 2 12"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Pinterest">
+                    <svg viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor"
+                         stroke-width="1.5" stroke-linecap="round">
+                        <circle cx="7" cy="6" r="5"/>
+                        <path d="M6 10.5 4.8 13.2"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <svg viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor"
+                         stroke-width="1.5" stroke-linejoin="round">
+                        <rect x="1" y="3" width="12" height="8" rx="2.5"/>
+                        <path d="M6 5.4 9 7 6 8.6Z" fill="currentColor"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer__columns">
+            <div>
+                <h2>Shop</h2>
+                <ul>
+                    <li><a href="#">New arrivals</a></li>
+                    <li><a href="#">Outerwear</a></li>
+                    <li><a href="#">Knitwear</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Help</h2>
+                <ul>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Size guide</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Studio</h2>
+                <ul>
+                    <li><a href="#">Our story</a></li>
+                    <li><a href="#">Materials</a></li>
+                    <li><a href="#">Stockists</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ---- Mobile menu: a full-screen panel, opened from the hamburger ---- */
+    var toggle = document.querySelector('.nav-toggle');
+    var panel  = document.getElementById('nav-panel');
+    var close  = panel.querySelector('.nav-panel__close');
+
+    function setOpen(open) {
+        panel.hidden = !open;
+        panel.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';
+        (open ? close : toggle).focus();
+    }
+
+    toggle.addEventListener('click', function () { setOpen(true); });
+    close.addEventListener('click', function () { setOpen(false); });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && panel.classList.contains('is-open')) setOpen(false);
+    });
+
+    /* ---- Validate on blur, not on keystroke. Re-validate on input only
+           once a field has already errored. ---- */
+    var form = document.querySelector('.message__form');
+
+    function showError(field) {
+        var valid = field.checkValidity();
+        field.setAttribute('aria-invalid', String(!valid));
+        field.style.borderColor = valid ? '' : 'var(--danger-500)';
+        field.style.borderWidth = valid ? '' : '2px';
+        return valid;
+    }
+
+    Array.prototype.forEach.call(form.querySelectorAll('[required]'), function (field) {
+        field.addEventListener('blur', function () {
+            showError(field);
+            field.addEventListener('input', function onInput() {
+                if (field.getAttribute('aria-invalid') === 'true') showError(field);
+            });
+        });
+    });
+
+    form.addEventListener('submit', function (e) {
+        var firstInvalid = null;
+
+        Array.prototype.forEach.call(form.querySelectorAll('[required]'), function (field) {
+            if (!showError(field) && !firstInvalid) firstInvalid = field;
+        });
+
+        if (firstInvalid) {
+            e.preventDefault();
+            firstInvalid.focus();
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

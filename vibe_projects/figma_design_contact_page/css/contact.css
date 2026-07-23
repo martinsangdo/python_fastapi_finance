@@ -1,0 +1,574 @@
+/* FASHION — Contact page layout.
+ *
+ * Only composition lives here. Colours, type, radii and spacing all come
+ * from the tokens in design-system.css; nothing new is introduced. */
+
+/* ============================================================
+   Top navigation — 32px tall, 24px from page top, no border, no shadow
+   ============================================================ */
+
+.nav-bar {
+    padding-top: var(--space-6);
+}
+
+.nav-bar__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    min-height: 32px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.brand__mark {
+    width: 17px;
+    height: 17px;
+    color: var(--ink-900);
+}
+
+.nav-bar__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-left: auto;
+}
+
+.nav-link {
+    font-size: var(--size-11);
+    font-weight: var(--weight-medium);
+    line-height: 1.5;
+    letter-spacing: var(--track-nav);
+    text-transform: uppercase;
+    color: var(--ink-700);
+    text-decoration: none;
+    position: relative;
+    transition: color var(--dur-fast) var(--ease);
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background-color: var(--ink-900);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-fast) var(--ease);
+}
+
+.nav-link:hover {
+    color: var(--ink-900);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-link[aria-current="page"] {
+    color: var(--ink-900);
+}
+
+.nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+.nav-bar__account {
+    width: 74px;
+}
+
+/* The hamburger only exists below 1024. */
+.nav-toggle {
+    display: none;
+    margin-left: auto;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--ink-900);
+    cursor: pointer;
+}
+
+/* Below lg the nav becomes a full-screen black panel, not a dropdown. */
+.nav-panel {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    flex-direction: column;
+    padding: var(--space-8);
+    background-color: var(--ink-900);
+}
+
+.nav-panel.is-open {
+    display: flex;
+}
+
+.nav-panel__close {
+    align-self: flex-end;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    color: var(--surface-inv);
+    cursor: pointer;
+}
+
+.nav-panel__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+}
+
+.nav-panel__list a {
+    font-size: var(--size-24);
+    font-weight: var(--weight-black);
+    line-height: 1.05;
+    letter-spacing: var(--track-heading);
+    text-transform: uppercase;
+    color: var(--surface-inv);
+    text-decoration: none;
+}
+
+.nav-panel__account {
+    margin-top: auto;
+    background-color: var(--surface-0);
+    border-color: var(--surface-0);
+    color: var(--ink-900);
+}
+
+@media (max-width: 1023px) {
+    .nav-bar__links,
+    .nav-bar__account {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+    }
+}
+
+/* ============================================================
+   Hero panel — 45/55 split, image overflows the panel
+   ============================================================ */
+
+.hero {
+    margin-top: var(--space-6);   /* nav → hero */
+}
+
+.hero__panel {
+    position: relative;
+    display: grid;
+    /* 45/55 as fr, not percentages — percentages plus a gap overflow the
+       grid by the gap width. */
+    grid-template-columns: 45fr 55fr;
+    align-items: center;
+    gap: var(--space-10);
+    min-height: 426px;
+}
+
+.hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero__title {
+    /* Manually line-broken in the markup — never auto-wrapped. */
+    margin-bottom: var(--space-6);
+}
+
+.hero__cta {
+    margin-top: var(--space-10);
+}
+
+/* The photograph is oversized and allowed to break the panel's top and
+   right edges — the one element that deliberately overflows. */
+.hero__figure {
+    position: relative;
+    align-self: stretch;
+}
+
+/* Sized off its height so the 11:16 crop stays exact, then allowed to run
+   past the panel's top and right edges. */
+.hero__image {
+    position: absolute;
+    top: calc(var(--panel-pad-y) * -1 - 24px);
+    right: calc(var(--panel-pad-x) * -1 - 24px);
+    width: auto;
+    max-width: none;
+    height: calc(100% + var(--panel-pad-y) + 64px);
+    aspect-ratio: 11 / 16;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+}
+
+.star--1 { top: -18px;  left: 4%;   transform: rotate(-11deg); }
+.star--2 { top: 22%;    right: -6%; transform: rotate(9deg);   width: 22px; height: 22px; }
+.star--3 { bottom: 14%; left: -4%;  transform: rotate(-6deg);  width: 25px; height: 25px; }
+.star--4 { bottom: -10px; right: 18%; transform: rotate(14deg); }
+
+@media (max-width: 1023px) {
+    .hero__panel {
+        grid-template-columns: 1fr 1fr;
+        min-height: 0;
+    }
+
+    .hero__image {
+        right: calc(var(--panel-pad-x) * -1 - 8px);
+        height: calc(100% + var(--panel-pad-y) + 24px);
+    }
+
+    /* Keep 2 of the 4 sparkles at tablet. */
+    .star--2,
+    .star--4 {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero__panel {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+
+    /* Below 768 the image is clipped to the panel instead of overflowing. */
+    .hero__figure {
+        position: static;
+    }
+
+    .hero__image {
+        position: static;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 5;
+    }
+}
+
+@media (max-width: 479px) {
+    .star {
+        display: none;
+    }
+}
+
+/* ============================================================
+   Accent band — full-bleed, 88px, black text on yellow only
+   ============================================================ */
+
+.band {
+    margin-top: var(--space-10);   /* hero panel → accent band */
+    background-color: var(--accent-500);
+}
+
+.band__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-15);
+    min-height: var(--band-height);
+    color: var(--ink-900);
+}
+
+.band__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    white-space: nowrap;
+}
+
+.band__item dt {
+    font-size: var(--size-12);
+    font-weight: var(--weight-medium);
+    line-height: 1.1;
+    letter-spacing: var(--track-label-caps);
+    text-transform: uppercase;
+}
+
+.band__item dd {
+    font-size: var(--size-14);
+    font-weight: var(--weight-medium);
+    line-height: 1.4;
+    letter-spacing: var(--track-tight);
+}
+
+.band__item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.band__item a:hover {
+    text-decoration: underline;
+}
+
+/* Below 768 the band becomes a horizontally scrolling rail. */
+@media (max-width: 767px) {
+    .band__inner {
+        justify-content: flex-start;
+        gap: var(--space-6);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .band__inner::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* ============================================================
+   "How can we help" — 3-column grid of content cards
+   ============================================================ */
+
+.help__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-12);
+}
+
+.card-content h3 {
+    margin-bottom: var(--space-1);
+}
+
+@media (max-width: 1023px) {
+    .help__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-8);
+    }
+}
+
+@media (max-width: 767px) {
+    .help__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+}
+
+/* ============================================================
+   Message form — 45/55 split, form left, studio detail right
+   ============================================================ */
+
+.message__split {
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    gap: var(--space-12);
+    align-items: start;
+}
+
+.message__form {
+    max-width: 480px;
+}
+
+/* Grid rather than column-flex: a flex item's main size comes from its
+   flex basis, which would ignore the image's aspect-ratio and leave it at
+   its intrinsic height. */
+.message__aside {
+    display: grid;
+    align-content: start;
+    gap: var(--space-6);
+}
+
+.message__image {
+    width: 100%;
+    /* Needed so aspect-ratio wins over the img's height="" presentation hint. */
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+}
+
+.address-block {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+}
+
+.address-block h3 {
+    margin-bottom: var(--space-2);
+}
+
+.address-block p {
+    font-size: var(--size-14);
+    line-height: 1.6;
+    letter-spacing: var(--track-tight);
+    color: var(--ink-800);
+}
+
+.address-block a {
+    color: var(--ink-900);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.address-block a:hover {
+    text-decoration-thickness: 2px;
+}
+
+@media (max-width: 1023px) {
+    .message__split {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+    }
+
+    .message__form {
+        max-width: var(--prose-measure);
+    }
+}
+
+@media (max-width: 767px) {
+    .address-block {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
+   Newsletter capture — centred stack
+   ============================================================ */
+
+.newsletter__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-3);
+}
+
+.newsletter__subtitle {
+    color: var(--ink-400-accessible);
+}
+
+.newsletter__form {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.newsletter__input {
+    width: 272px;
+}
+
+@media (max-width: 479px) {
+    .newsletter__form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .newsletter__input {
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   Footer — full-bleed black, ~260px, no divider rules
+   ============================================================ */
+
+.footer {
+    margin-top: var(--space-18);   /* last section → footer */
+    background-color: var(--ink-900);
+    color: var(--surface-inv);
+    padding-block: var(--space-14);
+}
+
+.footer__inner {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    gap: var(--space-22);
+}
+
+.footer__brand .wordmark {
+    font-size: var(--size-24);
+    color: var(--surface-inv);
+}
+
+.footer__descriptor {
+    max-width: 220px;
+    margin-top: var(--space-3);
+    color: var(--ink-400);
+}
+
+.footer__social {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+}
+
+.footer__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: var(--surface-0);
+    border-radius: var(--radius-input);
+    color: var(--ink-900);
+    transition: background-color var(--dur-fast) var(--ease);
+}
+
+.footer__social a:hover {
+    background-color: var(--accent-500);
+}
+
+.footer__social svg {
+    width: 14px;
+    height: 14px;
+}
+
+.footer__columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-22);
+}
+
+.footer__columns h2 {
+    font-size: var(--size-13);
+    font-weight: var(--weight-medium);
+    line-height: 1.7;
+    letter-spacing: var(--track-tight);
+    color: var(--surface-inv);
+    margin-bottom: var(--space-3);
+}
+
+.footer__columns li + li {
+    margin-top: var(--space-7);
+}
+
+.footer__columns a {
+    font-size: var(--size-13);
+    font-weight: var(--weight-regular);
+    line-height: 1.7;
+    letter-spacing: var(--track-tight);
+    color: var(--ink-400);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease);
+}
+
+.footer__columns a:hover {
+    color: var(--surface-inv);
+}
+
+@media (max-width: 1023px) {
+    .footer__inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+    }
+
+    .footer__columns {
+        gap: var(--space-10);
+    }
+}
+
+@media (max-width: 767px) {
+    .footer__columns {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-8);
+    }
+}

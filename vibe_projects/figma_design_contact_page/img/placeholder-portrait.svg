@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 242 352" width="242" height="352" role="img" aria-label="Image placeholder">
+  <!-- Flat placeholder in system neutrals only. Swap for the real 11:16 photograph. -->
+  <rect width="242" height="352" fill="#E7EAE9"/>
+  <g fill="none" stroke="#7F7F7F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="93" y="152" width="56" height="44" rx="4"/>
+    <path d="M93 184l16-14 12 10 14-16 14 20"/>
+    <circle cx="132" cy="166" r="4"/>
+  </g>
+</svg>
